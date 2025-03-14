@@ -1,57 +1,72 @@
-BEGIN; 
+BEGIN;
 
+CREATE DATABASE IF NOT EXISTS hb_sql_exo_fondcombe;
+USE hb_sql_exo_fondcombe;
+
+DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL
+    intitule VARCHAR(100) NOT NULL
 );
 
+DROP TABLE IF EXISTS regions;
 CREATE TABLE regions (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL,
     statut BOOLEAN NOT NULL
 );
 
+DROP TABLE IF EXISTS quetes;
 CREATE TABLE quetes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     titre VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    region_id INT NOT NULL REFERENCES regions(id)
+    idRegion INT NOT NULL REFERENCES regions(id)
 );
 
+DROP TABLE IF EXISTS races;
 CREATE TABLE races (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL,
     adjectif VARCHAR(100) NOT NULL
 );
 
+DROP TABLE IF EXISTS chambres;
 CREATE TABLE chambres (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    capacite_chambre INT NOT NULL,
-    numero_chambre INT NOT NULL,
-    etage_chambre INT NOT NULL,
-    race_id INT NOT NULL REFERENCES races(id)
+    numero INT NOT NULL,
+    etage INT NOT NULL,
+    capacite INT NOT NULL,
+    idRaceStyle INT NOT NULL REFERENCES races(id)
 );
 
+DROP TABLE IF EXISTS personnes;
 CREATE TABLE personnes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
-    date_naissance DATE NOT NULL,
-    role_id INT NOT NULL REFERENCES roles(id)
+    dateNaissance DATE NOT NULL,
+    idRole INT NOT NULL REFERENCES roles(id),
+    idRace INT NOT NULL REFERENCES races(id),
+    idRegion INT NOT NULL REFERENCES regions(id)
 );
 
+DROP TABLE IF EXISTS occupations;
 CREATE TABLE occupations (
-    chambre_id INT NOT NULL REFERENCES chambres(id),
-    utilisateur_id INT NOT NULL REFERENCES personnes(id),
-    date_debut DATE NOT NULL,
-    date_fin DATE
+    idChambre INT NOT NULL REFERENCES chambres(id),
+    idPersonne INT NOT NULL REFERENCES personnes(id),
+    PRIMARY KEY (idChambre, idPersonne),
+    dateDebut DATE NOT NULL,
+    dateFin DATE
 );
 
-CREATE TABLE personnes_quetes (
-    personne_id INT NOT NULL REFERENCES personnes(id),
-    quete_id INT NOT NULL REFERENCES quetes(id),
-    date_debut DATE NOT NULL,
-    date_fin DATE
+DROP TABLE IF EXISTS aventuriers;
+CREATE TABLE aventuriers (
+    idPersonne INT NOT NULL REFERENCES personnes(id),
+    idQuete INT NOT NULL REFERENCES quetes(id),
+    PRIMARY KEY (idQuete, idPersonne),
+    dateDebut DATE NOT NULL,
+    dateFin DATE
 );
 
 COMMIT;
