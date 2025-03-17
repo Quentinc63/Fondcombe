@@ -35,3 +35,9 @@ WHERE occupations.idChambre IS NULL
 ORDER BY chambres.capacite DESC
 LIMIT 1;
 
+
+SELECT * 
+FROM quetes q
+JOIN aventuriers a ON q.id = a.idQuete 
+JOIN personnes p ON p.id = a.idPersonne
+WHERE a.dateDebut > CURDATE()	
