@@ -6,8 +6,8 @@ JOIN chambres ON occupations.chambre_id = chambres.id
 -- 	Trouver le nombre total de personnes pour chaque statut
 SELECT COUNT(*) AS nombres_par_race , races.nom AS nom_race
 FROM personnes 
-JOIN races  ON personnes.idRace = races.id
-GROUP BY races.nom 
+LEFT JOIN races  ON personnes.idRace = races.id
+GROUP BY races.id
 
 --	Rechercher toutes les quêtes assignées à une personne spécifique.
 SELECT *
