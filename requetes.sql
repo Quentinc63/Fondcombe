@@ -50,6 +50,16 @@ LEFT JOIN aventuriers a ON p.id = a.idPersonne
     AND a.dateFin > '3018-10-25' 
 WHERE a.idPersonne IS NULL;
 
+SELECT *
+FROM personnes p
+WHERE p.id NOT IN (
+SELECT p.id
+FROM personnes p
+LEFT JOIN aventuriers a ON p.id = a.idPersonne
+WHERE a.dateDebut <= '3019-02-26'
+ AND  a.dateFin >= '3018-10-25');
+
+
 -- Rechercher le nombre de personnes dans chaque type de chambre
 SELECT COUNT(*) AS nombre_personne ,r.nom FROM occupations o 
 JOIN  chambres c ON c.id = o.idChambre
