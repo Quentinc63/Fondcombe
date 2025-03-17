@@ -35,7 +35,7 @@ WHERE occupations.idChambre IS NULL
 ORDER BY chambres.capacite DESC
 LIMIT 1;
 
-
+--	Lister toutes les quêtes à venir et les personnes y participant.
 SELECT * 
 FROM quetes q
 JOIN aventuriers a ON q.id = a.idQuete 
