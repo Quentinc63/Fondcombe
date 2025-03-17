@@ -42,6 +42,13 @@ JOIN aventuriers a ON q.id = a.idQuete
 JOIN personnes p ON p.id = a.idPersonne
 WHERE a.dateDebut > CURDATE()	
 
+-- Trouver les personnes qui n'ont pas de quête assignée entre deux dates données.
+SELECT *
+FROM personnes p
+LEFT JOIN aventuriers a ON p.id = a.idPersonne
+    AND a.dateDebut < '3019-02-26' 
+    AND a.dateFin > '3018-10-25' 
+WHERE a.idPersonne IS NULL;
 
 -- Rechercher le nombre de personnes dans chaque type de chambre
 SELECT COUNT(*) AS nombre_personne ,r.nom FROM occupations o 
