@@ -43,8 +43,18 @@ JOIN personnes p ON p.id = a.idPersonne
 WHERE a.dateDebut > CURDATE()	
 
 
-
+-- Rechercher le nombre de personnes dans chaque type de chambre
 SELECT COUNT(*) AS nombre_personne ,r.nom FROM occupations o 
 JOIN  chambres c ON c.id = o.idChambre
 JOIN races r ON c.idRaceStyle = r.id
 GROUP BY r.nom
+
+--Trouver la personne séjournant le plus longtemps à Fondcombe.
+SELECT p.nom, p.prenom, o.dateDebut, o.dateFin, 
+       DATEDIFF(o.dateFin, o.dateDebut) AS duree_sejour
+FROM personnes p
+JOIN occupations o ON p.id = o.idPersonne
+WHERE o.dateFin IS NOT NULL
+ORDER BY duree_sejour DESC
+LIMIT 1;
+
