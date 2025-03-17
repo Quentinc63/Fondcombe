@@ -49,7 +49,7 @@ JOIN  chambres c ON c.id = o.idChambre
 JOIN races r ON c.idRaceStyle = r.id
 GROUP BY r.nom
 
---Trouver la personne séjournant le plus longtemps à Fondcombe.
+-- Trouver la personne séjournant le plus longtemps à Fondcombe.
 SELECT p.nom, p.prenom, o.dateDebut, o.dateFin, 
        DATEDIFF(o.dateFin, o.dateDebut) AS duree_sejour
 FROM personnes p
@@ -58,3 +58,9 @@ WHERE o.dateFin IS NOT NULL
 ORDER BY duree_sejour DESC
 LIMIT 1;
 
+-- Lister toutes les personnes qui participent à plus de 2 quêtes.
+SELECT p.nom, p.prenom, COUNT(*) AS "nombre de quetes"
+FROM aventuriers a
+JOIN personnes p ON a.idPersonne = p.id
+GROUP BY idPersonne
+HAVING COUNT(*) > 2
