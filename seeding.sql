@@ -39,7 +39,8 @@ INSERT INTO quetes (titre, description, idRegion) VALUES
 ('Embuscade à Amon Hen', 'Échapper à l''embuscade des Uruk-hai à Amon Hen.', 1),
 ('Guérison de Théoden', 'Libérer Théoden de l''emprise de Saroumane.', 2),
 ('Négociations avec les Ents', 'Convaincre les Ents de se joindre à la guerre contre Saroumane.', 7),
-('Bataille de la Porte Noire', 'Distraire l''Œil de Sauron pour permettre à Frodon d''atteindre la Montagne du Destin.', 6);
+('Bataille de la Porte Noire', 'Distraire l''Œil de Sauron pour permettre à Frodon d''atteindre la Montagne du Destin.', 6),
+('Bataille pour la porte du SQL ' , 'Défendre la porte du SQL contre les forces de l''erreur 404', 6);
 
 -- Insertion des races
 INSERT INTO races (nom, adjectif) VALUES
@@ -78,7 +79,8 @@ INSERT INTO personnes (nom, prenom, dateNaissance, idRole, idRace, idRegion) VAL
 ('Fils de Denethor', 'Boromir', '2978-07-12', 3, 1, 1),
 ('Brandebouc', 'Meriadoc', '2982-08-15', 1, 4, 3),
 ('Touque', 'Peregrin', '2990-11-28', 1, 4, 3),
-('Fils de Thranduil', 'Thranduil', '0500-02-22', 5, 2, 4);
+('Fils de Thranduil', 'Thranduil', '0500-02-22', 5, 2, 4),
+('Pezet', 'Pierre','2968-09-22', 3,1,6 );
 
 -- Insertion des occupations
 INSERT INTO occupations (idChambre, idPersonne, dateDebut, dateFin) VALUES
@@ -105,6 +107,12 @@ INSERT INTO aventuriers (idPersonne, idQuete, dateDebut, dateFin) VALUES
 (4, 2, '3019-03-03', '3019-03-04'),
 (5, 2, '3019-03-03', '3019-03-04'),
 (1, 2, '3018-10-25', '3019-03-25'),  
-(1, 3, '3018-10-25', '3019-03-25');  
+(1, 3, '3018-10-25', '3019-03-25'),
+(11, 11, '3018-06-10', '3018-09-09'),
+(11, 8, '3018-11-01', '3018-09-09'),
+(11, 7, '3019-01-21', '3019-06-30'),
+(11, 6, '3019-04-26', '3020-01-09'),
+(11,9, '3018-08-16','3019-01-07');
+
 
 COMMIT;
