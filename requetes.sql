@@ -41,3 +41,10 @@ FROM quetes q
 JOIN aventuriers a ON q.id = a.idQuete 
 JOIN personnes p ON p.id = a.idPersonne
 WHERE a.dateDebut > CURDATE()	
+
+
+
+SELECT COUNT(*) AS nombre_personne ,r.nom FROM occupations o 
+JOIN  chambres c ON c.id = o.idChambre
+JOIN races r ON c.idRaceStyle = r.id
+GROUP BY r.nom
