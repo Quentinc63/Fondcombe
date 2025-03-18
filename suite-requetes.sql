@@ -62,4 +62,18 @@ DELIMITER ;
 CALL get_user_without_quest('3018-10-25', '3019-02-26');
 
 
+-- Case
+
+SELECT p.nom, p.prenom, o.dateDebut, o.dateFin, 
+       DATEDIFF(o.dateFin, o.dateDebut) AS duree_sejour,
+       CASE 
+           WHEN DATEDIFF(o.dateFin, o.dateDebut) < 6 THEN 'timide'
+           WHEN DATEDIFF(o.dateFin, o.dateDebut) >= 6 THEN 'BIEN'
+       END AS paye
+FROM personnes p
+JOIN occupations o ON p.id = o.idPersonne
+WHERE o.dateFin IS NOT NULL
+ORDER BY duree_sejour DESC;
+
+
 
