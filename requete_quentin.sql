@@ -11,7 +11,7 @@ SELECT * FROM informations_clients;
 
 --View quete
 
-CREATE VIEWfos_quetes AS
+CREATE VIEW infos_quetes AS
 SELECT * 
 FROM personnes p 
 JOIN aventuriers a ON p.id = a.idPersonne
