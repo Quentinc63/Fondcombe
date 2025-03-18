@@ -41,3 +41,24 @@ INSERT INTO occupations (idChambre, idPersonne, dateDebut, dateFin) VALUES
 
 --Procedure
 
+
+DELIMITER //
+CREATE PROCEDURE get_user_without_quest(
+    IN in_dateDebut DATE, 
+    IN in_dateFin DATE
+)
+BEGIN
+    SELECT p.*
+    FROM personnes p
+    LEFT JOIN aventuriers a 
+        ON p.id = a.idPersonne
+        AND a.dateDebut < in_dateDebut 
+        AND a.dateFin > in_dateFin
+    WHERE a.idPersonne IS NULL;
+END //
+DELIMITER ;
+
+CALL get_user_without_quest('3019-02-26', '3018-10-25');
+
+
+
