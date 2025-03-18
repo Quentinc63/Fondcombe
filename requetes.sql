@@ -1,7 +1,7 @@
 -- Lister toutes les personnes séjournant à Fondcombe avec leurs informations de chambre.
 SELECT * FROM personnes 
-JOIN occupations ON personnes.id = occupations.utilisateur_id
-JOIN chambres ON occupations.chambre_id = chambres.id
+JOIN occupations ON personnes.id = occupations.idPersonne
+JOIN chambres ON occupations.idChambre = chambres.id
 
 -- 	Trouver le nombre total de personnes pour chaque statut
 SELECT COUNT(*) AS nombres_par_race , races.nom AS nom_race
