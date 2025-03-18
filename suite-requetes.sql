@@ -1,16 +1,19 @@
---view CLIENT + chambre
-CREATE VIEW informations_clients AS	
-SELECT p.nom, p.prenom, p.dateNaissance, o.dateDebut AS debut_sejour, o.dateFin AS fin_sejour, c.numero AS numero_chambre, c.etage, c.capacite, r.adjectif AS type_chambre
-FROM personnes p
-JOIN occupations o ON o.idPersonne =  p.id
-JOIN chambres c ON  o.idChambre = c.id
-JOIN races r ON r.id = c.idRaceStyle
+-- Créer une vue pour lister toutes les personnes avec leurs informations de chambre
+CREATE VIEW personnes_chambres AS (
+    SELECT p.nom, p.prenom, p.dateNaissance, 
+    o.dateDebut AS debut_sejour, o.dateFin AS fin_sejour, 
+    c.numero AS numero_chambre, c.etage, c.capacite, 
+    r.adjectif AS type_chambre
+    FROM personnes p
+    LEFT JOIN occupations o ON o.idPersonne =  p.id
+    LEFT JOIN chambres c ON  o.idChambre = c.id
+    LEFT JOIN races r ON r.id = c.idRaceStyle
+);
 
 SELECT * FROM informations_clients;  
 
 
---View quete
-
+-- Créer une vue pour lister les quêtes à venir et leurs participants
 CREATE VIEW infos_quetes AS
 SELECT * 
 FROM personnes p 
@@ -20,8 +23,7 @@ AND  dateDebut > CURDATE()
 SELECT * FROM  infos_quetes 
 
 
---trigger
-
+-- Créer un trigger qui empêche l'insertion d'un séjour avec une date de départ antérieure à sa date d'arrivée
 DELIMITER //
 
 CREATE TRIGGER date_trigger
@@ -39,9 +41,8 @@ DELIMITER ;
 INSERT INTO occupations (idChambre, idPersonne, dateDebut, dateFin) VALUES
 (5, 6, '3018-10-25', '3018-10-20')
 
---Procedure
 
-
+-- Créer une procédure qui liste les personnes sans quête entre deux dates données
 DELIMITER //
 CREATE PROCEDURE get_user_without_quest(
     IN in_dateDebut DATE, 
