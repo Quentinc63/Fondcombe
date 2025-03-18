@@ -58,7 +58,7 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL get_user_without_quest('3019-02-26', '3018-10-25');
+CALL get_user_without_quest('3018-10-25', '3019-02-26');
 
 
 
